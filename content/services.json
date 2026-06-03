@@ -1,0 +1,32 @@
+{
+  "services": [
+    {
+      "name": "Classic",
+      "blurb": "One extension per natural lash. Clean, defined, your-lashes-but-better.",
+      "price": "$8,000",
+      "featured": false,
+      "tag": ""
+    },
+    {
+      "name": "Hybrid",
+      "blurb": "A mix of classic and volume fans. Texture, depth, that wispy edge.",
+      "price": "$9,500",
+      "featured": false,
+      "tag": ""
+    },
+    {
+      "name": "Volume",
+      "blurb": "Lightweight fans, maximum drama. Full, fluffy, and built to last.",
+      "price": "$10,500",
+      "featured": true,
+      "tag": "Most Loved"
+    },
+    {
+      "name": "Mega Volume",
+      "blurb": "The boldest set we do. Dense, dark, unmistakable. Pure statement.",
+      "price": "$12,000",
+      "featured": false,
+      "tag": ""
+    }
+  ]
+}

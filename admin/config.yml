@@ -1,0 +1,46 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "promotions"
+    label: "Promotions"
+    files:
+      - label: "Promo Banner & Specials"
+        name: "promotions"
+        file: "content/promotions.json"
+        fields:
+          - label: "Banner"
+            name: "banner"
+            widget: "object"
+            fields:
+              - { label: "Show Banner", name: "show", widget: "boolean", default: false }
+              - { label: "Banner Text", name: "text", widget: "string" }
+              - { label: "Banner Link", name: "link", widget: "string", default: "#book-form" }
+          - label: "Specials"
+            name: "specials"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Detail", name: "detail", widget: "string" }
+              - { label: "Code", name: "code", widget: "string", required: false }
+
+  - name: "services"
+    label: "Featured Services"
+    files:
+      - label: "Homepage Services"
+        name: "services"
+        file: "content/services.json"
+        fields:
+          - label: "Services"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "blurb", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "Tag", name: "tag", widget: "string", required: false }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request Sent — Angel's Lash Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--ink-900); color: var(--fg-1); font-family: var(--font-sans);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 20px; text-align: center; -webkit-font-smoothing: antialiased; }
+    .badge { width: 88px; height: 88px; border-radius: 999px; background: var(--grad-violet-soft);
+      display: flex; align-items: center; justify-content: center; color: #fff; font-size: 42px;
+      box-shadow: var(--glow-violet); margin: 0 auto 28px; }
+    h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem,5vw,3.2rem);
+      color: var(--fg-1); line-height: 1.04; letter-spacing: -.01em; }
+    h1 em { font-style: italic; }
+    p { font-weight: 300; font-size: 1.1rem; color: var(--fg-2); line-height: 1.65; max-width: 40ch; margin: 18px auto 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-weight: 500;
+      font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer;
+      border: none; border-radius: 999px; text-decoration: none; padding: 17px 32px;
+      transition: transform 140ms ease-out, box-shadow 260ms; }
+    .btn-primary { background: var(--grad-violet-soft); color: #fff; box-shadow: 0 10px 30px -8px rgba(157,95,217,.6); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-violet); }
+    .btn-ghost { background: rgba(246,241,251,.06); color: var(--fg-1); border: 1px solid var(--line-strong); }
+    .btn-ghost:hover { background: rgba(157,95,217,.16); border-color: var(--violet-400); }
+    .ig { margin-top: 32px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-3);
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: color .2s; }
+    .ig:hover { color: var(--violet-300); }
+    .ig i { color: var(--violet-400); font-size: 16px; }
+  </style>
+</head>
+<body class="alse-type">
+  <div class="badge"><i class="ph-light ph-check"></i></div>
+  <h1>Request <em>sent.</em></h1>
+  <p>Angel will reach out shortly to confirm your appointment. Keep an eye on your texts and email.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="/">Back to home <i class="ph-light ph-arrow-right"></i></a>
+    <a class="btn btn-ghost" href="menu/">View the menu</a>
+  </div>
+  <a class="ig" href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer">
+    <i class="ph-light ph-instagram-logo"></i> @angels.lash.studio
+  </a>
+</body>
+</html>

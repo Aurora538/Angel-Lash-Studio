@@ -1,0 +1,64 @@
+functionsDirectory = "/opt/build/repo/netlify/functions"
+functionsDirectoryOrigin = "default"
+redirectsOrigin = "config"
+plugins = []
+headers = []
+
+[build]
+publish = "/opt/build/repo"
+publishOrigin = "default"
+functions = "/opt/build/repo/netlify/functions"
+
+  [build.environment]
+
+  [build.processing]
+
+    [build.processing.css]
+
+    [build.processing.html]
+
+    [build.processing.images]
+
+    [build.processing.js]
+
+  [build.services]
+
+[functions]
+
+  [functions."*"]
+
+[[redirects]]
+from = "/booking-success"
+to = "/booking-success.html"
+status = 301
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/booking"
+to = "/booking/"
+status = 301
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/menu"
+to = "/menu/"
+status = 301
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]

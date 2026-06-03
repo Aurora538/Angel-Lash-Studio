@@ -1,0 +1,83 @@
+/* =========================================================================
+   ANGEL'S LASH STUDIO — Design Tokens
+   Luxe glam · plum-black & violet · dramatic · Gen-Z editorial
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink-900: #150b1e;
+  --ink-800: #1d1129;
+  --ink-700: #271934;
+  --ink-600: #352445;
+  --ink-500: #463155;
+
+  --violet-300: #d9bcf2;
+  --violet-400: #bd8fe8;
+  --violet-500: #9d5fd9;
+  --violet-600: #7e3fc4;
+  --violet-700: #5a2796;
+
+  --orchid-400: #e89fdb;
+  --orchid-500: #d96fc0;
+
+  --gold-400: #e6cf94;
+  --gold-500: #cbab68;
+
+  --cream-50:  #f6f1fb;
+  --cream-100: #efe6f7;
+  --cream-200: #e3d5ef;
+
+  --grad-violet: linear-gradient(150deg, #d9bcf2 0%, #bd8fe8 36%, #9d5fd9 62%, #7e3fc4 100%);
+  --grad-violet-soft: linear-gradient(180deg, #a96fe0 0%, #8b4fcf 100%);
+  --grad-gold: linear-gradient(150deg, #f0e3bf 0%, #e6cf94 45%, #cbab68 100%);
+  --grad-stage: radial-gradient(120% 90% at 50% 0%, #2a1840 0%, #150b1e 60%);
+
+  --bg:        var(--ink-900);
+  --surface-1: var(--ink-800);
+  --surface-2: var(--ink-700);
+
+  --fg-1: #f4ecfb;
+  --fg-2: #c3b2d4;
+  --fg-3: #8b7a9e;
+
+  --accent:      var(--violet-500);
+  --accent-text: var(--violet-400);
+  --line:        rgba(157, 95, 217, 0.26);
+  --line-strong: rgba(157, 95, 217, 0.46);
+  --focus-ring:  rgba(189, 143, 232, 0.6);
+
+  --success: #7faa86;
+  --warning: #d8b86a;
+  --danger:  #c96a8e;
+
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Jost', system-ui, sans-serif;
+  --font-mono:    'SFMono-Regular', ui-monospace, Menlo, monospace;
+
+  --radius-xs: 4px;  --radius-sm: 8px;  --radius-md: 14px;
+  --radius-lg: 22px; --radius-xl: 32px; --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(8,4,14,0.5);
+  --shadow-md: 0 8px 24px -8px rgba(8,4,14,0.6);
+  --shadow-lg: 0 24px 60px -18px rgba(8,4,14,0.72);
+  --glow-violet: 0 0 0 1px rgba(157,95,217,0.4), 0 10px 36px -10px rgba(157,95,217,0.45);
+
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   140ms;  --dur-base: 260ms;  --dur-slow: 480ms;
+}
+
+.on-light {
+  --bg:        var(--cream-50);
+  --surface-1: #ffffff;
+  --surface-2: var(--cream-100);
+  --fg-1: #1f1330;
+  --fg-2: #5b4a6e;
+  --fg-3: #897a9c;
+  --accent-text: var(--violet-700);
+  --line:        rgba(31, 19, 48, 0.12);
+  --line-strong: rgba(31, 19, 48, 0.26);
+}
+
+.alse-type, .alse-type * { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }

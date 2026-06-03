@@ -1,0 +1,14 @@
+{
+  "banner": {
+    "show": true,
+    "text": "New clients save 20% on any full set this month \u2014 mention code NEWLASH20",
+    "link": "#book-form"
+  },
+  "specials": [
+    {
+      "title": "20% off your first set",
+      "detail": "New clients save on any full set this month.",
+      "code": "NEWLASH20"
+    }
+  ]
+}

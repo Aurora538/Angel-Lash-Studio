@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 132" role="img" aria-label="Angel&#39;s Lash Studio">
+  <defs>
+    <linearGradient id="alseWViolet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9bcf2"></stop>
+      <stop offset="0.5" stop-color="#a96fe0"></stop>
+      <stop offset="1" stop-color="#7e3fc4"></stop>
+    </linearGradient>
+    
+  </defs>
+  <text class="word" x="260" y="74" text-anchor="middle" font-size="78" fill="url(#alseWViolet)">Angel’s</text>
+  <text class="sub" x="263" y="108" text-anchor="middle" font-size="17" fill="#bd8fe8">LASH STUDIO</text>
+  <line x1="120" y1="102" x2="186" y2="102" stroke="#9d5fd9" stroke-width="1"></line>
+  <line x1="340" y1="102" x2="406" y2="102" stroke="#9d5fd9" stroke-width="1"></line>
+</svg>

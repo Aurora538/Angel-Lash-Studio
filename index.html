@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angel's Lash Studio — Custom Lash Extensions</title>
+  <meta name="description" content="Angel's Lash Studio — custom lash extensions in Classic, Hybrid, Volume, and Mega Volume. Dramatic, long-lasting sets by appointment only. Book your set today.">
+  <meta property="og:title" content="Angel's Lash Studio">
+  <meta property="og:description" content="Custom lash artistry for the bold. Classic · Hybrid · Volume · Mega Volume. By appointment only.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#150b1e">
+  <link rel="canonical" href="https://angels-lash-studio.netlify.app/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink-900); color: var(--fg-1); font-family: var(--font-sans); overflow-x: hidden; }
+
+    /* ── Promo bar ── */
+    .promobar { display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+      background: var(--grad-violet-soft); color: #fff; padding: 11px 18px; font-family: var(--font-sans);
+      font-size: 13px; font-weight: 400; letter-spacing: .02em; text-align: center; line-height: 1.3;
+      position: relative; z-index: 30; }
+    .promobar i { font-size: 16px; flex: none; }
+    .promobar__go { font-size: 14px; transition: transform var(--dur-base); }
+    .promobar:hover .promobar__go { transform: translateX(3px); }
+    @media(max-width:560px) { .promobar { font-size: 12px; padding: 10px 14px; } }
+
+    /* ── Hero ── */
+    .hero { position: relative; min-height: 100svh; width: 100%; overflow: hidden; display: flex; flex-direction: column; }
+    .hero__media { position: absolute; inset: 0; z-index: 0; }
+    .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(1.02) contrast(1.03); }
+    .tint-violet { position: absolute; inset: 0; background:
+      radial-gradient(80% 60% at 50% 22%, rgba(157,95,217,0) 40%, rgba(90,39,150,0.28) 100%),
+      linear-gradient(180deg, rgba(123,63,196,0.16) 0%, rgba(21,11,30,0) 30%);
+      mix-blend-mode: soft-light; z-index: 1; pointer-events: none; }
+    .scrim-top { position: absolute; top: 0; left: 0; right: 0; height: 34%; z-index: 2;
+      background: linear-gradient(180deg, rgba(13,7,19,0.82) 0%, rgba(13,7,19,0) 100%); pointer-events: none; }
+    .scrim-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 66%; z-index: 2;
+      background: linear-gradient(0deg, #150b1e 2%, rgba(21,11,30,0.86) 26%, rgba(21,11,30,0.2) 64%, rgba(21,11,30,0) 100%); pointer-events: none; }
+    .grain { position: absolute; inset: 0; z-index: 3; opacity: .10; pointer-events: none; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    @media(prefers-reduced-motion: reduce) { .grain { display: none; } }
+
+    /* ── Nav ── */
+    .nav { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+      padding: 22px clamp(20px,5vw,56px); }
+    .nav__mark { display: flex; align-items: center; gap: 12px; }
+    .nav__mark img { width: 46px; height: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+    .nav__name { font-family: var(--font-sans); font-weight: 500; font-size: 11px; letter-spacing: .34em;
+      text-transform: uppercase; color: var(--fg-1); opacity: .9; }
+    .nav__links { display: flex; align-items: center; gap: 28px; }
+    .nav__links a { color: var(--fg-1); text-decoration: none; font-size: 11.5px; letter-spacing: .2em;
+      text-transform: uppercase; font-weight: 400; opacity: .85; transition: color var(--dur-fast) var(--ease-out), opacity var(--dur-fast); }
+    .nav__links a:hover { color: var(--violet-300); opacity: 1; }
+    .nav__ig { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px;
+      border: 1px solid var(--line-strong); border-radius: 999px; font-size: 17px; color: var(--fg-1);
+      transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base); }
+    .nav__ig:hover { background: rgba(157,95,217,.18); border-color: var(--violet-400); }
+    @media(max-width:680px) { .nav__txt-links { display: none; } }
+
+    /* ── Hero body ── */
+    .hero__body { position: relative; z-index: 5; margin-top: auto;
+      padding: 0 clamp(20px,5vw,56px) clamp(34px,6vh,64px); max-width: 980px; }
+    .eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .eyebrow span { font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--violet-300); font-weight: 500; white-space: nowrap; }
+    .eyebrow .rule { height: 1px; width: 54px; background: linear-gradient(90deg, var(--violet-400), transparent); }
+    .lockup { line-height: .92; }
+    .lockup .l1 { display: block; font-family: var(--font-display); font-style: italic; font-weight: 600;
+      font-size: clamp(4.2rem,15vw,10.5rem); color: #fff; letter-spacing: -.01em; text-shadow: 0 8px 40px rgba(0,0,0,.5); }
+    .lockup .l2 { display: flex; align-items: center; gap: clamp(14px,3vw,28px); margin-top: 6px; }
+    .lockup .l2 b { font-family: var(--font-sans); font-weight: 400;
+      font-size: clamp(.95rem,3.4vw,1.7rem); letter-spacing: clamp(.28em,1.2vw,.5em);
+      text-transform: uppercase; color: var(--violet-200, #e3d2f5); }
+    .lockup .l2 .rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(217,188,242,.55), rgba(217,188,242,0)); }
+    .tagline { margin-top: 26px; font-family: var(--font-display); font-style: italic; font-weight: 500;
+      font-size: clamp(1.35rem,3.2vw,2rem); color: var(--fg-1); opacity: .92; max-width: 30ch; }
+    .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 34px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-weight: 500;
+      font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer;
+      border: none; border-radius: 999px; text-decoration: none; transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base), background var(--dur-base); }
+    .btn-primary { background: var(--grad-violet-soft); color: #fff; padding: 17px 32px;
+      box-shadow: 0 10px 30px -8px rgba(157,95,217,.6); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-violet); }
+    .btn-primary:active { transform: translateY(0) scale(.98); background: var(--violet-600); }
+    .btn-ghost { background: rgba(246,241,251,.06); color: var(--fg-1); padding: 16px 28px;
+      border: 1px solid var(--line-strong); backdrop-filter: blur(4px); }
+    .btn-ghost:hover { background: rgba(157,95,217,.16); border-color: var(--violet-400); }
+    .btn-ghost:active { transform: scale(.98); }
+    .meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; }
+    .meta span, .meta a { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3);
+      display: inline-flex; align-items: center; gap: 8px; }
+    .meta a { text-decoration: none; transition: color var(--dur-fast); }
+    .meta a:hover { color: var(--violet-300); }
+    .meta i { color: var(--violet-400); font-size: 15px; }
+    .scroll-hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 5;
+      display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--fg-3);
+      font-size: 9px; letter-spacing: .3em; text-transform: uppercase; animation: float 2.4s var(--ease-inout) infinite; }
+    @keyframes float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+    @media(prefers-reduced-motion: reduce) { .scroll-hint { animation: none; } }
+    @media(max-width:680px) { .scroll-hint { display: none; } }
+
+    /* ── Shared section scaffold ── */
+    section { position: relative; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px,5vw,56px); }
+    .sec { padding: clamp(64px,11vh,128px) 0; }
+    .sec-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: 56px; }
+    .eb { display: inline-flex; align-items: center; gap: 13px; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--violet-400); font-weight: 500; }
+    .eb .r { height: 1px; width: 38px; background: linear-gradient(90deg, transparent, var(--violet-500)); }
+    .eb .r.r2 { background: linear-gradient(90deg, var(--violet-500), transparent); }
+    .sh2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(2.2rem,4.6vw,3.6rem);
+      line-height: 1.06; letter-spacing: -.01em; color: var(--fg-1); }
+    .sh2 em { font-style: italic; }
+    .sub-lead { font-family: var(--font-sans); font-weight: 300; font-size: clamp(1rem,1.6vw,1.18rem);
+      color: var(--fg-2); max-width: 46ch; line-height: 1.6; }
+    .text-link { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--violet-300); text-decoration: none; font-weight: 500;
+      padding-bottom: 6px; border-bottom: 1px solid var(--line-strong); transition: gap var(--dur-base) var(--ease-out), color var(--dur-base); }
+    .text-link:hover { gap: 15px; color: var(--violet-200, #e3d2f5); }
+
+    /* ── Services ── */
+    .services { background: var(--ink-900); }
+    .svc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    @media(max-width:920px) { .svc-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:520px) { .svc-grid { grid-template-columns: 1fr; } }
+    .svc { position: relative; background: var(--ink-800); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); padding: 30px 24px 26px; display: flex; flex-direction: column;
+      transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base), box-shadow var(--dur-base); }
+    .svc:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .svc.feat { border-color: transparent; box-shadow: var(--glow-violet); background:
+      linear-gradient(180deg, rgba(157,95,217,.12), rgba(29,17,41,1) 60%); }
+    .svc__tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--grad-violet-soft); color: #fff; font-size: 9px; letter-spacing: .2em;
+      text-transform: uppercase; font-weight: 600; padding: 6px 14px; border-radius: 999px; white-space: nowrap; }
+    .svc__name { font-family: var(--font-display); font-weight: 600; font-size: 1.7rem; color: var(--fg-1); line-height: 1; }
+    .svc__blurb { font-family: var(--font-sans); font-weight: 300; font-size: .9rem; color: var(--fg-2);
+      line-height: 1.55; margin: 14px 0 22px; flex: 1; }
+    .svc__foot { display: flex; align-items: baseline; justify-content: flex-start; gap: 10px;
+      border-top: 1px solid var(--line); padding-top: 16px; }
+    .svc__price { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; color: var(--violet-300); white-space: nowrap; }
+    .svc-foot-link { display: flex; justify-content: center; margin-top: 46px; }
+
+    /* ── Editorial band ── */
+    .band { background: var(--grad-stage); text-align: center; overflow: hidden; }
+    .band::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(60% 80% at 50% 50%, rgba(157,95,217,.18), transparent 70%); pointer-events: none; }
+    .band .wrap { position: relative; }
+    .band__q { font-family: var(--font-display); font-style: italic; font-weight: 500;
+      font-size: clamp(1.8rem,4.4vw,3.3rem); line-height: 1.18; color: var(--fg-1); max-width: 18ch; margin: 0 auto; }
+    .band__q b { font-weight: 600; color: var(--violet-300); }
+    .band__sig { margin-top: 30px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--fg-3); }
+    .band__mark { width: 54px; margin: 0 auto 28px; display: block; opacity: .92; }
+
+    /* ── About ── */
+    .about { background: var(--ink-900); }
+    .about__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,6vw,80px); align-items: center; }
+    @media(max-width:760px) { .about__grid { grid-template-columns: 1fr; } }
+    .about__img { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; background: var(--ink-800);
+      border: 1px solid var(--line); position: relative; }
+    .about__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+    .about__img-badge { position: absolute; bottom: 20px; left: 20px; right: 20px;
+      background: rgba(13,7,19,.82); backdrop-filter: blur(10px); border: 1px solid var(--line-strong);
+      border-radius: var(--radius-md); padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+    .about__img-badge i { color: var(--violet-300); font-size: 22px; flex: none; }
+    .about__img-badge span { font-size: .85rem; font-weight: 300; color: var(--fg-2); line-height: 1.4; }
+    .about__text { display: flex; flex-direction: column; gap: 20px; }
+    .about__text .sh2 { text-align: left; }
+    .about__text p { font-family: var(--font-sans); font-weight: 300; font-size: clamp(1rem,1.5vw,1.1rem); color: var(--fg-2); line-height: 1.7; }
+    .about__creds { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+    .about__cred { display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--fg-3); border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 16px; }
+    .about__cred i { color: var(--violet-400); font-size: 14px; }
+
+    /* ── Testimonials ── */
+    .testimonials { background: var(--ink-800); overflow: hidden; }
+    .testimonials::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(80% 60% at 50% 0%, rgba(157,95,217,.1), transparent 70%); pointer-events: none; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    @media(max-width:880px) { .testi-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:560px) { .testi-grid { grid-template-columns: 1fr; } }
+    .testi { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius-lg);
+      padding: 28px 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+    .testi__stars { display: flex; gap: 4px; color: var(--gold-400); font-size: 14px; }
+    .testi__q { font-family: var(--font-display); font-style: italic; font-weight: 500;
+      font-size: clamp(1.1rem,1.6vw,1.3rem); color: var(--fg-1); line-height: 1.4; flex: 1; }
+    .testi__author { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .testi__av { width: 38px; height: 38px; border-radius: 999px; background: var(--grad-violet-soft);
+      display: flex; align-items: center; justify-content: center; font-family: var(--font-display);
+      font-weight: 600; font-size: 1rem; color: #fff; flex: none; }
+    .testi__name { font-size: .88rem; font-weight: 500; color: var(--fg-1); }
+    .testi__sub { font-size: .78rem; color: var(--fg-3); font-weight: 300; margin-top: 1px; }
+    .testi__service { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--violet-400); background: rgba(157,95,217,.1);
+      border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; margin-left: auto; flex: none; }
+
+    /* ── Gallery ── */
+    .gallery { background: var(--ink-900); }
+    .gal-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: repeat(2, minmax(180px,30vh)); gap: 14px; }
+    .gal-item { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--line); background: var(--ink-800); }
+    .gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-out); }
+    .gal-item:hover img { transform: scale(1.04); }
+    .g1 { grid-row: 1 / span 2; }
+    .gal-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--ink-800), var(--ink-700)); color: var(--line-strong); font-size: 32px; }
+    @media(max-width:760px) { .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3,30vh); } .g1 { grid-row: 1 / span 1; } }
+
+    /* ── Aftercare ── */
+    .aftercare { background: var(--ink-900); }
+    .care-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 40px; max-width: 920px; margin: 0 auto; }
+    @media(max-width:640px) { .care-grid { grid-template-columns: 1fr; } }
+    .care-item { display: flex; gap: 15px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .care-item i { color: var(--violet-300); font-size: 20px; margin-top: 1px; flex: none; }
+    .care-item p { font-family: var(--font-sans); font-weight: 300; font-size: 1.02rem; color: var(--fg-2); line-height: 1.55; }
+    .care-note { text-align: center; margin: 44px auto 0; max-width: 54ch; font-family: var(--font-display);
+      font-style: italic; font-weight: 500; font-size: clamp(1.1rem,2vw,1.35rem); color: var(--fg-1); opacity: .92; line-height: 1.4; }
+
+    /* ── Manage / Cancel ── */
+    .manage { background: var(--ink-900); overflow: hidden; }
+    .manage::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(70% 90% at 50% 120%, rgba(157,95,217,.12), transparent 70%); pointer-events: none; }
+    .manage .wrap { position: relative; }
+    .manage__card { display: flex; align-items: center; gap: clamp(20px,4vw,48px); flex-wrap: wrap;
+      justify-content: center; text-align: center; border: 1px solid var(--line); border-radius: var(--radius-lg);
+      padding: clamp(30px,5vw,52px); background: linear-gradient(180deg, var(--ink-800), rgba(20,12,30,.6)); }
+    .manage__ico { width: 62px; height: 62px; border-radius: 999px; flex: none;
+      border: 1px solid var(--line-strong); background: rgba(157,95,217,.1);
+      display: flex; align-items: center; justify-content: center; color: var(--violet-300); font-size: 30px; }
+    .manage__text { flex: 1; min-width: 240px; text-align: left; }
+    .manage__text h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem,3vw,2.3rem);
+      color: var(--fg-1); line-height: 1.06; }
+    .manage__text p { font-family: var(--font-sans); font-weight: 300; font-size: 1rem; color: var(--fg-2);
+      line-height: 1.6; margin-top: 10px; max-width: 44ch; }
+    .manage__actions { display: flex; flex-direction: column; gap: 12px; flex: none; }
+    @media(max-width:640px) { .manage__text { text-align: center; } .manage__actions { width: 100%; } }
+
+    /* ── Book CTA ── */
+    .book-cta { background: var(--grad-violet-soft); overflow: hidden; text-align: center; }
+    .book-cta::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(70% 120% at 50% -10%, rgba(255,255,255,.22), transparent 60%); pointer-events: none; }
+    .book-cta .wrap { position: relative; }
+    .book-cta h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.4rem,5.4vw,4rem);
+      color: #fff; line-height: 1.04; letter-spacing: -.01em; }
+    .book-cta h2 em { font-style: italic; }
+    .book-cta p { color: rgba(255,255,255,.86); font-weight: 300; font-size: 1.05rem; margin: 18px auto 34px; max-width: 40ch; }
+    .btn-light { background: #fff; color: var(--violet-700); padding: 18px 36px; }
+    .btn-light:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(0,0,0,.4); }
+    .btn-light:active { transform: scale(.98); }
+
+    /* ── Booking form ── */
+    .bookform { background: var(--ink-900); }
+    .bf { max-width: 640px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .bf__full { grid-column: 1 / -1; }
+    .bf label { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--fg-3); font-weight: 500; margin-bottom: 9px; }
+    .bf input, .bf select, .bf textarea { width: 100%; background: var(--ink-800); border: 1px solid var(--line);
+      border-radius: var(--radius-md); padding: 15px 16px; color: var(--fg-1); font-family: var(--font-sans);
+      font-size: 15px; outline: none; transition: border-color var(--dur-base), background var(--dur-base); }
+    .bf input::placeholder, .bf textarea::placeholder { color: #6c5d7e; }
+    .bf input:focus, .bf select:focus, .bf textarea:focus { border-color: var(--violet-400); background: var(--ink-700); }
+    .bf select { appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23bd8fe8' stroke-width='1.5'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; background-color: var(--ink-800); padding-right: 42px; }
+    .bf textarea { min-height: 96px; resize: vertical; }
+    .bf__submit { grid-column: 1 / -1; margin-top: 6px; }
+    .bf__submit button { width: 100%; background: var(--grad-violet-soft); color: #fff; border: none; cursor: pointer;
+      padding: 18px; border-radius: 999px; font-family: var(--font-sans); font-size: 13px; letter-spacing: .14em;
+      text-transform: uppercase; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      transition: transform var(--dur-base), box-shadow var(--dur-base); }
+    .bf__submit button:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -12px rgba(157,95,217,.6); }
+    .bf__submit button:active { transform: scale(.99); }
+    .bf__note { grid-column: 1 / -1; text-align: center; font-size: .82rem; font-weight: 300; color: var(--fg-3);
+      line-height: 1.5; margin-top: 4px; }
+    .bf__hp { position: absolute; left: -9999px; }
+    .bf__addon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .bf__addon { display: flex; align-items: center; gap: 12px; background: var(--ink-800); border: 1px solid var(--line);
+      border-radius: var(--radius-md); padding: 13px 15px; margin: 0; cursor: pointer; text-transform: none; letter-spacing: 0;
+      transition: border-color var(--dur-base), background var(--dur-base); }
+    .bf__addon:hover { border-color: var(--line-strong); }
+    .bf__addon input[type=checkbox] { width: 18px; height: 18px; flex: none; margin: 0; padding: 0; cursor: pointer; accent-color: var(--violet-500); }
+    .bf__addon span { font-size: 14px; color: var(--fg-1); font-weight: 300; }
+    .bf__addon .price { margin-left: auto; color: var(--violet-300); font-size: 13px; }
+    .bf__hint { font-size: .78rem; color: var(--fg-3); font-weight: 300; margin: 8px 0 0; }
+    .bf__err { font-size: .82rem; color: #e89aa8; font-weight: 400; margin: 8px 0 0; display: none; }
+    .bf__err.show { display: block; }
+    .bf input.bf--invalid { border-color: #e89aa8; }
+    @media(max-width:560px) { .bf { grid-template-columns: 1fr; } .bf__addon-grid { grid-template-columns: 1fr; } }
+
+    /* ── Footer ── */
+    footer { background: #0e0716; padding: 64px 0 40px; }
+    .foot-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-start; }
+    .foot-brand img { width: 160px; margin-bottom: 18px; display: block; }
+    .foot-brand p { font-size: .85rem; color: var(--fg-3); max-width: 30ch; line-height: 1.7; }
+    .foot-col h4 { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--violet-400); font-weight: 500; margin-bottom: 16px; }
+    .foot-col a, .foot-col span { display: block; color: var(--fg-2); text-decoration: none; font-size: .9rem;
+      font-weight: 300; margin-bottom: 10px; transition: color var(--dur-fast); }
+    .foot-col a:hover { color: var(--violet-300); }
+    .foot-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+    .foot-bottom span { font-size: 11px; letter-spacing: .1em; color: var(--fg-3); }
+    .foot-ig { display: inline-flex; gap: 12px; }
+    .foot-ig a { width: 38px; height: 38px; border: 1px solid var(--line-strong); border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center; color: var(--fg-1); font-size: 17px;
+      transition: background var(--dur-base), border-color var(--dur-base); }
+    .foot-ig a:hover { background: rgba(157,95,217,.18); border-color: var(--violet-400); }
+    .foot-admin { color: var(--fg-3) !important; text-decoration: none; border-bottom: 1px solid var(--line); font-size: 11px; }
+  </style>
+</head>
+<body class="alse-type">
+
+  <!-- Promo bar (populated from content/promotions.json) -->
+  <a class="promobar" id="promobar" href="#book-form" hidden>
+    <i class="ph-light ph-seal-percent"></i>
+    <span id="promobar-text"></span>
+    <i class="ph-light ph-arrow-right promobar__go"></i>
+  </a>
+
+  <!-- ── Hero ── -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero__media">
+      <img src="assets/hero-lashes.jpg" alt="Close-up of dramatic full lash extensions by Angel's Lash Studio" loading="eager">
+    </div>
+    <div class="tint-violet" aria-hidden="true"></div>
+    <div class="scrim-top" aria-hidden="true"></div>
+    <div class="scrim-bottom" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__mark">
+        <img src="assets/logo-mark-violet.svg" alt="Angel's Lash Studio" width="46">
+        <span class="nav__name">Angel's</span>
+      </div>
+      <div class="nav__links">
+        <a class="nav__txt-links" href="#services">Services</a>
+        <a class="nav__txt-links" href="menu/">The Menu</a>
+        <a class="nav__txt-links" href="#book-form">Book</a>
+        <a class="nav__ig" href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer" aria-label="Instagram @angels.lash.studio">
+          <i class="ph-light ph-instagram-logo" aria-hidden="true"></i>
+        </a>
+      </div>
+    </nav>
+
+    <div class="hero__body">
+      <div class="eyebrow"><span class="rule"></span><span>Est. Angel's Lash Studio</span></div>
+      <div class="lockup">
+        <span class="l1">Angel's</span>
+        <span class="l2"><b>Lash Studio</b><span class="rule"></span></span>
+      </div>
+      <p class="tagline">Lashes that do the talking.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#book-form">Book your set <i class="ph-light ph-arrow-right" aria-hidden="true"></i></a>
+        <a class="btn btn-ghost" href="menu/">View the menu</a>
+      </div>
+      <div class="meta">
+        <span><i class="ph-light ph-sparkle" aria-hidden="true"></i> Classic · Hybrid · Volume · Mega</span>
+        <span><i class="ph-light ph-map-pin" aria-hidden="true"></i> By appointment</span>
+        <a href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer">
+          <i class="ph-light ph-instagram-logo" aria-hidden="true"></i> @angels.lash.studio
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><i class="ph-light ph-arrow-down"></i></div>
+  </section>
+
+  <!-- ── Services ── -->
+  <section class="sec services" id="services" aria-label="Services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>The Menu<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">Pick your <em>drama.</em></h2>
+        <p class="sub-lead">Every set is custom-mapped to your eyes. From a barely-there flutter to full, fluffy volume.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="svc__name">Classic</div>
+          <p class="svc__blurb">One extension per natural lash. Clean, defined, your-lashes-but-better.</p>
+          <div class="svc__foot"><span class="svc__price">$8,000</span></div>
+        </div>
+        <div class="svc">
+          <div class="svc__name">Hybrid</div>
+          <p class="svc__blurb">A mix of classic and volume fans. Texture, depth, that wispy edge.</p>
+          <div class="svc__foot"><span class="svc__price">$9,500</span></div>
+        </div>
+        <div class="svc feat">
+          <div class="svc__tag">Most Loved</div>
+          <div class="svc__name">Volume</div>
+          <p class="svc__blurb">Lightweight fans, maximum drama. Full, fluffy, and built to last.</p>
+          <div class="svc__foot"><span class="svc__price">$10,500</span></div>
+        </div>
+        <div class="svc">
+          <div class="svc__name">Mega Volume</div>
+          <p class="svc__blurb">The boldest set we do. Dense, dark, unmistakable. Pure statement.</p>
+          <div class="svc__foot"><span class="svc__price">$12,000</span></div>
+        </div>
+      </div>
+      <div class="svc-foot-link">
+        <a class="text-link" href="menu/">View the full menu &amp; refills <i class="ph-light ph-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Editorial band ── -->
+  <section class="sec band" aria-label="Quote">
+    <div class="wrap">
+      <img class="band__mark" src="assets/logo-mark-violet.svg" alt="" aria-hidden="true" width="54">
+      <p class="band__q">"Every set is mapped to <b>your</b> eyes — never a one-size lash."</p>
+      <div class="band__sig">— Angel · Lead Lash Artist</div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section class="sec about" id="about" aria-label="About Angel">
+    <div class="wrap">
+      <div class="about__grid">
+        <div class="about__img">
+          <img src="assets/hero-lashes.jpg" alt="Angel, lead lash artist at Angel's Lash Studio" loading="lazy">
+          <div class="about__img-badge">
+            <i class="ph-light ph-certificate" aria-hidden="true"></i>
+            <span>Certified lash artist · 6+ years of experience</span>
+          </div>
+        </div>
+        <div class="about__text">
+          <span class="eb"><span class="r" aria-hidden="true"></span>Meet Angel<span class="r r2" aria-hidden="true"></span></span>
+          <h2 class="sh2">Artistry, not <em>assembly.</em></h2>
+          <p>Angel is a certified lash artist with over six years of experience in dramatic, custom-mapped extensions. Her philosophy is simple — no two faces are the same, so no two sets should be either.</p>
+          <p>Every appointment begins with a detailed consultation on eye shape, lifestyle, and the level of drama you're going for. The result is a set built around <em>you</em>, not a template.</p>
+          <div class="about__creds">
+            <span class="about__cred"><i class="ph-light ph-check-circle" aria-hidden="true"></i> Certified Lash Artist</span>
+            <span class="about__cred"><i class="ph-light ph-shield-check" aria-hidden="true"></i> Premium Materials Only</span>
+            <span class="about__cred"><i class="ph-light ph-sparkle" aria-hidden="true"></i> Gen-Z Inspired Styles</span>
+          </div>
+          <a class="btn btn-primary" href="#book-form" style="align-self:flex-start;margin-top:8px">
+            Book your set <i class="ph-light ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ── -->
+  <section class="sec testimonials" id="testimonials" aria-label="Client testimonials">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>Client Love<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">What they're <em>saying.</em></h2>
+        <p class="sub-lead">Don't take our word for it. Real clients, real results.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi">
+          <div class="testi__stars" aria-label="5 stars">
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+          </div>
+          <p class="testi__q">"Angel completely transformed my lashes. The Volume set is absolutely stunning — everyone keeps asking if they're real."</p>
+          <div class="testi__author">
+            <div class="testi__av" aria-hidden="true">J</div>
+            <div>
+              <div class="testi__name">Jade M.</div>
+              <div class="testi__sub">Returning client</div>
+            </div>
+            <span class="testi__service"><i class="ph-light ph-sparkle" aria-hidden="true"></i> Volume</span>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi__stars" aria-label="5 stars">
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+          </div>
+          <p class="testi__q">"Booked on a whim for a work event and showed up looking like a completely different person. Worth every penny."</p>
+          <div class="testi__author">
+            <div class="testi__av" aria-hidden="true">K</div>
+            <div>
+              <div class="testi__name">Kayla T.</div>
+              <div class="testi__sub">First-time client</div>
+            </div>
+            <span class="testi__service"><i class="ph-light ph-sparkle" aria-hidden="true"></i> Hybrid</span>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi__stars" aria-label="5 stars">
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+            <i class="ph-light ph-star-fill" aria-hidden="true"></i>
+          </div>
+          <p class="testi__q">"Been going to Angel for 8 months. My refills are always on point and she makes the whole experience so luxurious."</p>
+          <div class="testi__author">
+            <div class="testi__av" aria-hidden="true">B</div>
+            <div>
+              <div class="testi__name">Bianca R.</div>
+              <div class="testi__sub">Returning client · 8 months</div>
+            </div>
+            <span class="testi__service"><i class="ph-light ph-sparkle" aria-hidden="true"></i> Mega Volume</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Gallery ── -->
+  <section class="sec gallery" id="gallery" aria-label="Gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>The Work<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">See the <em>results.</em></h2>
+        <p class="sub-lead">Follow <a href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer" style="color:var(--violet-300);text-decoration:none">@angels.lash.studio</a> for the latest sets.</p>
+      </div>
+      <div class="gal-grid">
+        <div class="gal-item g1">
+          <img src="assets/hero-lashes.jpg" alt="Dramatic volume lash extensions" loading="lazy">
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder" aria-hidden="true"><i class="ph-light ph-instagram-logo"></i></div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder" aria-hidden="true"><i class="ph-light ph-instagram-logo"></i></div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder" aria-hidden="true"><i class="ph-light ph-instagram-logo"></i></div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder" aria-hidden="true"><i class="ph-light ph-instagram-logo"></i></div>
+        </div>
+      </div>
+      <div class="svc-foot-link" style="margin-top:32px">
+        <a class="text-link" href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer">
+          View more on Instagram <i class="ph-light ph-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Aftercare ── -->
+  <section class="sec aftercare" id="aftercare" aria-label="Aftercare">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>Lash Care<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">Aftercare <em>essentials.</em></h2>
+        <p class="sub-lead">A little care goes a long way. Follow these to keep your set full, clean, and lasting.</p>
+      </div>
+      <div class="care-grid">
+        <div class="care-item"><i class="ph-light ph-drop" aria-hidden="true"></i><p>Avoid getting your lashes wet for the first 24–48 hours.</p></div>
+        <div class="care-item"><i class="ph-light ph-hand-palm" aria-hidden="true"></i><p>Do not rub, pull, or pick at your lash extensions.</p></div>
+        <div class="care-item"><i class="ph-light ph-sparkle" aria-hidden="true"></i><p>Clean your lashes daily using a lash-safe cleanser to remove oils, makeup, and debris.</p></div>
+        <div class="care-item"><i class="ph-light ph-prohibit" aria-hidden="true"></i><p>Avoid oil-based makeup removers, cleansers, and skincare products around the eyes.</p></div>
+        <div class="care-item"><i class="ph-light ph-paint-brush-household" aria-hidden="true"></i><p>Brush your lashes gently each day with a clean spoolie.</p></div>
+        <div class="care-item"><i class="ph-light ph-moon" aria-hidden="true"></i><p>Avoid sleeping face-down, as this can cause lashes to bend or fall out prematurely.</p></div>
+        <div class="care-item"><i class="ph-light ph-x-circle" aria-hidden="true"></i><p>Do not use mascara on your lash extensions.</p></div>
+        <div class="care-item"><i class="ph-light ph-scissors" aria-hidden="true"></i><p>Avoid eyelash curlers, as they can damage both your natural lashes and extensions.</p></div>
+        <div class="care-item"><i class="ph-light ph-calendar-check" aria-hidden="true"></i><p>Schedule refill appointments every 2–3 weeks to maintain a full look.</p></div>
+      </div>
+      <p class="care-note">Following these tips will help extend the life of your lash extensions and keep your natural lashes healthy.</p>
+    </div>
+  </section>
+
+  <!-- ── Manage / Cancel ── -->
+  <section class="sec manage" id="manage" aria-label="Manage booking">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>Plans Changed?<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">Cancel or <em>reschedule.</em></h2>
+        <p class="sub-lead">Life happens. Manage your appointment easily — no phone call needed.</p>
+      </div>
+      <div class="manage__card">
+        <div class="manage__ico" aria-hidden="true"><i class="ph-light ph-calendar-x"></i></div>
+        <div class="manage__text">
+          <h3>Manage your appointment</h3>
+          <p>Need to move or cancel? Email us at least 48 hours before your appointment. Your deposit carries over when you reschedule.</p>
+        </div>
+        <div class="manage__actions">
+          <a class="btn btn-primary" href="mailto:lashesbyangel91@gmail.com?subject=Appointment%20Change%20Request">
+            Email to reschedule <i class="ph-light ph-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-ghost" href="menu/#policy">Cancellation policy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Book CTA ── -->
+  <section class="sec book-cta" aria-label="Book your appointment">
+    <div class="wrap">
+      <h2>Ready for your <em>set?</em></h2>
+      <p>Appointments are booking up. Secure your slot and we'll take it from here.</p>
+      <a class="btn btn-light" href="#book-form">Request your appointment <i class="ph-light ph-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </section>
+
+  <!-- ── Booking Form (Netlify Forms) ── -->
+  <section class="sec bookform" id="book-form" aria-label="Book an appointment">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb"><span class="r" aria-hidden="true"></span>Request a Booking<span class="r r2" aria-hidden="true"></span></span>
+        <h2 class="sh2">Request an <em>appointment.</em></h2>
+        <p class="sub-lead">Send your details and Angel will confirm your slot by text or email. New clients welcome.</p>
+      </div>
+
+      <form class="bf" name="appointment" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/booking-success.html" novalidate id="booking-form">
+        <input type="hidden" name="form-name" value="appointment">
+        <!-- Spam honeypot -->
+        <p class="bf__hp" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div>
+          <label for="bf-name">Full name <span style="color:var(--violet-400)">*</span></label>
+          <input id="bf-name" name="name" type="text" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div>
+          <label for="bf-phone">Phone <span style="color:var(--violet-400)">*</span></label>
+          <input id="bf-phone" name="phone" type="tel" placeholder="Best number to reach you" required autocomplete="tel">
+        </div>
+        <div>
+          <label for="bf-email">Email <span style="color:var(--violet-400)">*</span></label>
+          <input id="bf-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
+        </div>
+        <div>
+          <label for="bf-service">Service <span style="color:var(--violet-400)">*</span></label>
+          <select id="bf-service" name="service" required>
+            <option value="" disabled selected>Choose a set or refill…</option>
+            <optgroup label="Full Sets">
+              <option>Cluster — $3,000</option>
+              <option>Classic — $8,000</option>
+              <option>Hybrid — $9,500</option>
+              <option>Volume — $10,500</option>
+              <option>Mega Volume — $12,000</option>
+              <option>Wet Set — $10,000</option>
+            </optgroup>
+            <optgroup label="Refills">
+              <option>Hybrid Refill — $8,000</option>
+              <option>Volume Refill — $9,000</option>
+              <option>Mega Volume Refill — $10,000</option>
+            </optgroup>
+            <option>Not sure — help me choose</option>
+          </select>
+        </div>
+        <div>
+          <label for="bf-date">Preferred date</label>
+          <input id="bf-date" name="date" type="date" autocomplete="off">
+          <p class="bf__err" id="bf-date-err" role="alert"></p>
+          <p class="bf__hint" id="bf-date-hint" hidden></p>
+        </div>
+        <div>
+          <label for="bf-time">Preferred time</label>
+          <input id="bf-time" name="time" type="time" autocomplete="off">
+        </div>
+        <div class="bf__addons bf__full">
+          <label>Add-ons <span style="text-transform:none;letter-spacing:0;color:#6c5d7e">(optional — add to any set or refill)</span></label>
+          <div class="bf__addon-grid">
+            <label class="bf__addon"><input type="checkbox" name="addons" value="Bottom Lashes — $2,000"><span>Bottom Lashes</span><span class="price">$2,000</span></label>
+            <label class="bf__addon"><input type="checkbox" name="addons" value="Lash Removal — $2,000"><span>Lash Removal</span><span class="price">$2,000</span></label>
+            <label class="bf__addon"><input type="checkbox" name="addons" value="Lash Lift"><span>Lash Lift</span><span class="price">Ask</span></label>
+          </div>
+        </div>
+        <div class="bf__full">
+          <label for="bf-notes">Notes <span style="text-transform:none;letter-spacing:0;color:#6c5d7e">(optional)</span></label>
+          <textarea id="bf-notes" name="notes" placeholder="Anything we should know — inspo, allergies, current lashes…"></textarea>
+        </div>
+        <div class="bf__submit">
+          <button type="submit">Send booking request <i class="ph-light ph-paper-plane-tilt" aria-hidden="true"></i></button>
+        </div>
+        <p class="bf__note">By sending, you agree to our 48-hour cancellation policy. We'll reply to confirm — this is a request, not a final booking.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <img src="assets/logo-wordmark-violet.svg" alt="Angel's Lash Studio" width="160" loading="lazy">
+          <p>Custom lash artistry for the bold. By appointment only.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Studio</h4>
+          <a href="#services">Services</a>
+          <a href="menu/">The menu</a>
+          <a href="#about">About Angel</a>
+          <a href="#aftercare">Aftercare</a>
+        </div>
+        <div class="foot-col">
+          <h4>Book</h4>
+          <a href="#book-form">New clients</a>
+          <a href="#book-form">Refills</a>
+          <a href="menu/#policy">Policies</a>
+          <a href="mailto:lashesbyangel91@gmail.com?subject=Gift%20Card%20Inquiry">Gift cards</a>
+        </div>
+        <div class="foot-col">
+          <h4>Hours</h4>
+          <span>Mon–Sat · 9am–5pm</span>
+          <span>Sun · Closed</span>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="mailto:lashesbyangel91@gmail.com">lashesbyangel91@gmail.com</a>
+          <a href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer">@angels.lash.studio</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Angel's Lash Studio. All rights reserved. ·
+          <a href="/admin/" class="foot-admin">Studio login</a>
+        </span>
+        <div class="foot-ig">
+          <a href="https://instagram.com/angels.lash.studio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ph-light ph-instagram-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://tiktok.com/@angels.lash.studio" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <i class="ph-light ph-tiktok-logo" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Promo bar — read from content/promotions.json
+    fetch('content/promotions.json', { cache: 'no-store' })
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (!data || !data.banner || !data.banner.show || !data.banner.text) return;
+        var bar = document.getElementById('promobar');
+        document.getElementById('promobar-text').textContent = data.banner.text;
+        if (data.banner.link) bar.setAttribute('href', data.banner.link);
+        bar.hidden = false;
+      })
+      .catch(function() {});
+
+    // Client-side form validation + availability (blocked dates)
+    (function() {
+      var form = document.getElementById('booking-form');
+      if (!form) return;
+      var dateInput = document.getElementById('bf-date');
+      var dateErr = document.getElementById('bf-date-err');
+      var dateHint = document.getElementById('bf-date-hint');
+
+      var blocked = {};          // "YYYY-MM-DD" -> true
+      var closedDays = {};       // weekday number (0=Sun) -> true
+      var unavailableMsg = "That date isn't available — please choose another day.";
+
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function toKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+      // Load the studio's availability (managed in the admin) and lock down the date picker.
+      fetch('content/availability.json', { cache: 'no-store' })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+          if (!data) return;
+          if (data.message) unavailableMsg = data.message;
+          (data.blockedDates || []).forEach(function(d) { if (d) blocked[d] = true; });
+          (data.closedWeekdays || []).forEach(function(w) { closedDays[parseInt(w, 10)] = true; });
+
+          if (dateInput) {
+            var lead = parseInt(data.leadTimeDays, 10);
+            if (isNaN(lead)) lead = 0;
+            var min = new Date();
+            min.setDate(min.getDate() + lead);
+            dateInput.min = toKey(min);
+            if (dateHint) {
+              dateHint.hidden = false;
+              dateHint.textContent = lead > 0
+                ? 'Please book at least ' + lead + ' day' + (lead > 1 ? 's' : '') + ' ahead. Some dates may be unavailable.'
+                : 'Some dates may be unavailable — we’ll suggest another if so.';
+            }
+          }
+        })
+        .catch(function() {});
+
+      // Returns a reason string if the date is unavailable, otherwise "".
+      function dateProblem(value) {
+        if (!value) return "";
+        if (dateInput && dateInput.min && value < dateInput.min) {
+          return 'Please choose a date further ahead.';
+        }
+        if (blocked[value]) return unavailableMsg;
+        var parts = value.split('-');
+        var day = new Date(parts[0], parts[1] - 1, parts[2]).getDay();
+        if (closedDays[day]) return unavailableMsg;
+        return "";
+      }
+
+      function showDateError(msg) {
+        if (!dateErr) return;
+        if (msg) {
+          dateErr.textContent = msg;
+          dateErr.classList.add('show');
+          if (dateInput) dateInput.classList.add('bf--invalid');
+        } else {
+          dateErr.classList.remove('show');
+          if (dateInput) dateInput.classList.remove('bf--invalid');
+        }
+      }
+
+      if (dateInput) {
+        dateInput.addEventListener('change', function() {
+          showDateError(dateProblem(dateInput.value));
+        });
+      }
+
+      form.addEventListener('submit', function(e) {
+        var name = form.querySelector('[name=name]').value.trim();
+        var phone = form.querySelector('[name=phone]').value.trim();
+        var email = form.querySelector('[name=email]').value.trim();
+        var service = form.querySelector('[name=service]').value;
+        if (!name || !phone || !email || !service) {
+          e.preventDefault();
+          alert('Please fill in all required fields (name, phone, email, and service).');
+          return;
+        }
+        var problem = dateInput ? dateProblem(dateInput.value) : "";
+        if (problem) {
+          e.preventDefault();
+          showDateError(problem);
+          dateInput.focus();
+        }
+      });
+    })();
+
+    // Netlify Identity redirect for admin
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function(user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function() {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
