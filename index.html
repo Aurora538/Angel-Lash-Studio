@@ -650,8 +650,9 @@
         </div>
         <div>
           <label for="bf-date">Preferred date</label>
-          <input id="bf-date" name="date" type="date" autocomplete="off">
-          <p class="bf__err" id="bf-date-err" role="alert"></p>
+          <select id="bf-date" name="date" autocomplete="off">
+            <option value="" selected>Choose an available date…</option>
+          </select>
           <p class="bf__hint" id="bf-date-hint" hidden></p>
         </div>
         <div>
@@ -740,75 +741,64 @@
       })
       .catch(function() {});
 
-    // Client-side form validation + availability (blocked dates)
+    // Booking date picker — only lets customers choose dates the studio has
+    // marked available. The list is managed in the admin (content/availability.json),
+    // so the dropdown can never offer a day Angel hasn't opened.
     (function() {
       var form = document.getElementById('booking-form');
       if (!form) return;
-      var dateInput = document.getElementById('bf-date');
-      var dateErr = document.getElementById('bf-date-err');
+      var dateSelect = document.getElementById('bf-date');
       var dateHint = document.getElementById('bf-date-hint');
 
-      var blocked = {};          // "YYYY-MM-DD" -> true
-      var closedDays = {};       // weekday number (0=Sun) -> true
-      var unavailableMsg = "That date isn't available — please choose another day.";
+      var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
       function pad(n) { return (n < 10 ? '0' : '') + n; }
-      function toKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+      function todayKey() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
 
-      // Load the studio's availability (managed in the admin) and lock down the date picker.
-      fetch('content/availability.json', { cache: 'no-store' })
-        .then(function(r) { return r.ok ? r.json() : null; })
-        .then(function(data) {
-          if (!data) return;
-          if (data.message) unavailableMsg = data.message;
-          (data.blockedDates || []).forEach(function(d) { if (d) blocked[d] = true; });
-          (data.closedWeekdays || []).forEach(function(w) { closedDays[parseInt(w, 10)] = true; });
+      // "2026-06-11" -> "Wed 11 Jun 2026"
+      function label(iso) {
+        var p = iso.split('-');
+        var d = new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+        return DOW[d.getDay()] + ' ' + parseInt(p[2], 10) + ' ' + MON[d.getMonth()] + ' ' + p[0];
+      }
 
-          if (dateInput) {
-            var lead = parseInt(data.leadTimeDays, 10);
-            if (isNaN(lead)) lead = 0;
-            var min = new Date();
-            min.setDate(min.getDate() + lead);
-            dateInput.min = toKey(min);
-            if (dateHint) {
-              dateHint.hidden = false;
-              dateHint.textContent = lead > 0
-                ? 'Please book at least ' + lead + ' day' + (lead > 1 ? 's' : '') + ' ahead. Some dates may be unavailable.'
-                : 'Some dates may be unavailable — we’ll suggest another if so.';
+      function showHint(msg) {
+        if (!dateHint) return;
+        dateHint.textContent = msg;
+        dateHint.hidden = !msg;
+      }
+
+      // Load the studio's available dates and build the dropdown from them.
+      if (dateSelect) {
+        fetch('content/availability.json', { cache: 'no-store' })
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(data) {
+            var dates = (data && Array.isArray(data.dates)) ? data.dates : [];
+            var today = todayKey();
+            var seen = {};
+            // Keep only well-formed, today-or-future dates; de-duplicate and sort.
+            dates = dates
+              .filter(function(d) { return typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && d >= today; })
+              .filter(function(d) { if (seen[d]) return false; seen[d] = true; return true; })
+              .sort();
+
+            if (!dates.length) {
+              showHint('No open dates listed right now — send your request and Angel will find you a slot.');
+              return;
             }
-          }
-        })
-        .catch(function() {});
 
-      // Returns a reason string if the date is unavailable, otherwise "".
-      function dateProblem(value) {
-        if (!value) return "";
-        if (dateInput && dateInput.min && value < dateInput.min) {
-          return 'Please choose a date further ahead.';
-        }
-        if (blocked[value]) return unavailableMsg;
-        var parts = value.split('-');
-        var day = new Date(parts[0], parts[1] - 1, parts[2]).getDay();
-        if (closedDays[day]) return unavailableMsg;
-        return "";
-      }
-
-      function showDateError(msg) {
-        if (!dateErr) return;
-        if (msg) {
-          dateErr.textContent = msg;
-          dateErr.classList.add('show');
-          if (dateInput) dateInput.classList.add('bf--invalid');
-        } else {
-          dateErr.classList.remove('show');
-          if (dateInput) dateInput.classList.remove('bf--invalid');
-        }
-      }
-
-      if (dateInput) {
-        dateInput.addEventListener('change', function() {
-          showDateError(dateProblem(dateInput.value));
-        });
+            dates.forEach(function(d) {
+              var opt = document.createElement('option');
+              opt.value = d;
+              opt.textContent = label(d);
+              dateSelect.appendChild(opt);
+            });
+            showHint('Only the dates Angel has open are shown. Don’t see yours? Send a request and we’ll help.');
+          })
+          .catch(function() {
+            showHint('Pick a date and Angel will confirm availability.');
+          });
       }
 
       form.addEventListener('submit', function(e) {
@@ -819,13 +809,6 @@
         if (!name || !phone || !email || !service) {
           e.preventDefault();
           alert('Please fill in all required fields (name, phone, email, and service).');
-          return;
-        }
-        var problem = dateInput ? dateProblem(dateInput.value) : "";
-        if (problem) {
-          e.preventDefault();
-          showDateError(problem);
-          dateInput.focus();
         }
       });
     })();
