@@ -34,7 +34,7 @@ collections:
       - label: "Available Booking Dates"
         name: "availability"
         file: "content/availability.json"
-        description: "The dates customers can pick on the booking form. Add or remove dates from the list — only these will be selectable. Remove past dates when they're gone."
+        description: "The dates and times customers can pick on the booking form. Add or remove entries from each list — only these will be selectable. Remove past dates when they're gone."
         fields:
           - label: "Unavailable message"
             name: "message"
@@ -53,6 +53,16 @@ collections:
               date_format: "YYYY-MM-DD"
               time_format: false
               picker_utc: true
+          - label: "Available times"
+            name: "times"
+            label_singular: "Time"
+            widget: "list"
+            required: false
+            hint: "The time slots customers can pick on the booking form. Add or remove times — only these will be selectable (for example, 9:00 AM or 2:30 PM)."
+            field:
+              label: "Time"
+              name: "time"
+              widget: "string"
 
   - name: "services"
     label: "Featured Services"

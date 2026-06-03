@@ -657,7 +657,10 @@
         </div>
         <div>
           <label for="bf-time">Preferred time</label>
-          <input id="bf-time" name="time" type="time" autocomplete="off">
+          <select id="bf-time" name="time" autocomplete="off">
+            <option value="" selected>Choose an available time…</option>
+          </select>
+          <p class="bf__hint" id="bf-time-hint" hidden></p>
         </div>
         <div class="bf__addons bf__full">
           <label>Add-ons <span style="text-transform:none;letter-spacing:0;color:#6c5d7e">(optional — add to any set or refill)</span></label>
@@ -749,6 +752,8 @@
       if (!form) return;
       var dateSelect = document.getElementById('bf-date');
       var dateHint = document.getElementById('bf-date-hint');
+      var timeSelect = document.getElementById('bf-time');
+      var timeHint = document.getElementById('bf-time-hint');
 
       var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -769,11 +774,42 @@
         dateHint.hidden = !msg;
       }
 
+      function showTimeHint(msg) {
+        if (!timeHint) return;
+        timeHint.textContent = msg;
+        timeHint.hidden = !msg;
+      }
+
+      // Build the time-slot dropdown from the studio's managed list.
+      function buildTimes(data) {
+        if (!timeSelect) return;
+        var times = (data && Array.isArray(data.times)) ? data.times : [];
+        var seen = {};
+        times = times
+          .filter(function(t) { return typeof t === 'string' && t.trim() !== ''; })
+          .map(function(t) { return t.trim(); })
+          .filter(function(t) { if (seen[t]) return false; seen[t] = true; return true; });
+
+        if (!times.length) {
+          showTimeHint('No set times listed — tell us your preferred time in the notes and Angel will confirm.');
+          return;
+        }
+
+        times.forEach(function(t) {
+          var opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          timeSelect.appendChild(opt);
+        });
+      }
+
       // Load the studio's available dates and build the dropdown from them.
       if (dateSelect) {
         fetch('content/availability.json', { cache: 'no-store' })
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(data) {
+            buildTimes(data);
+
             var dates = (data && Array.isArray(data.dates)) ? data.dates : [];
             var today = todayKey();
             var seen = {};
