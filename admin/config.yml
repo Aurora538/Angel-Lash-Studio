@@ -28,6 +28,32 @@ collections:
               - { label: "Detail", name: "detail", widget: "string" }
               - { label: "Code", name: "code", widget: "string", required: false }
 
+  - name: "availability"
+    label: "Booking Availability"
+    files:
+      - label: "Available Booking Dates"
+        name: "availability"
+        file: "content/availability.json"
+        description: "The dates customers can pick on the booking form. Add or remove dates from the list — only these will be selectable. Remove past dates when they're gone."
+        fields:
+          - label: "Unavailable message"
+            name: "message"
+            widget: "string"
+            required: false
+            default: "That date isn't available — please choose another from the list."
+          - label: "Available dates"
+            name: "dates"
+            label_singular: "Date"
+            widget: "list"
+            required: false
+            field:
+              label: "Date"
+              name: "date"
+              widget: "datetime"
+              date_format: "YYYY-MM-DD"
+              time_format: false
+              picker_utc: true
+
   - name: "services"
     label: "Featured Services"
     files:
